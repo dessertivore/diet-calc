@@ -1,6 +1,7 @@
 import logo from './logo.png';
 import React, {useState, useEffect} from 'react';
 
+//this is the form which takes the data and then outputs the calcs
 function MyForm() {
   const [weight, setWeight] = useState(''); 
   const [ageYears, setAgeYears] = useState('');   
@@ -9,6 +10,7 @@ function MyForm() {
   const [fluidReq, setFluidRequirement] = useState(0);
   const [data, setData] = useState(null);
 
+  //put the data from form into apiURL
   useEffect(() => {
     const apiUrl = `http://127.0.0.1:8000/?weight=${weight}&years=${ageYears}&months=${ageMonths}`;
 
@@ -32,15 +34,17 @@ function MyForm() {
   }, [weight, ageYears, ageMonths]);
 
   
+ 
   return (
     <div>
-      <h1>Nutritional Calculator</h1>
+      
       <form>
         <label>
           Weight (kg):
           <input
             type="number"
             value={weight}
+            //autorefresh - no need for submit button
             onChange={(e) => setWeight(e.target.value)}
           />
         </label>
@@ -79,11 +83,14 @@ function MyForm() {
   );
 }
 
+
+ //what the webpage looks like
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <h1>Nutritional Calculator</h1>
         <p>
           Calculate the nutritional requirements for infants under 1 year of age.
         </p>

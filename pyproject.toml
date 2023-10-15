@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "diet-calc"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "nutr req calculator for infants"
+authors = ["dessertivore"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -11,8 +11,14 @@ uvicorn = "^0.23.2"
 annotated = "^0.0.2"
 path = "^16.7.1"
 
+
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^6.0"
+pytest-xdist = "^3.3.1"
+flake8 = "^6.1.0"
+flake8-bugbear = "^23.9.16"
+mypy = "^1.6.0"
+black = "^23.9.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
