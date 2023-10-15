@@ -1,10 +1,10 @@
-def nutr_infant(weight, years, months):
+def nutr_infant(weight: float, years: int, months: int) -> tuple[int, int]:
     fluid_day = 150
 
     # ensure that there are no decimals or letters in the wrong places
-    weight = float(weight)
-    years = int(years)
-    months = int(months)
+    # weight = float(weight)
+    # years = int(years)
+    # months = int(months)
 
     # currently only have enough data in for <1, so ensure that child is <1
     if years != 0:
