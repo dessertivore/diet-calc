@@ -8,3 +8,10 @@ lint:
 
 test:
 	poetry run pytest .
+
+backend:
+	poetry run uvicorn backend.main:app --reload 
+
+frontend: 
+	npm run start
+	
