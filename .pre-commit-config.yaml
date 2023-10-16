@@ -1,3 +1,5 @@
+
+
 repos:
 
 # lint check using my makefile command - has ruff, black and mypy
@@ -9,7 +11,7 @@ repos:
         language: system
         args: ['lint']
 
-# pytest using my makefile command
+# pytest using my makefile command in local language
 -   repo: local
     hooks:
     -   id: my-test
