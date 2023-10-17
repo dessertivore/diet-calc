@@ -1,4 +1,4 @@
-# Infant requirements calculator
+# Infant Requirements Calculator
 
 Calculates kcal and fluid requirements for infants based on weight and age. Only currently for infants under 1 but scope to expand later.
 
