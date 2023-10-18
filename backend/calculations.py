@@ -27,7 +27,8 @@ def nutr_infant(weight: float, years: int, months: int) -> tuple[int, int]:
         else:
             print("This calculator is only for children up to 12 months.")
 
-    # for children >10kg there is a different fluid calculation formula based on weight not age, see below
+    # for children >10kg there is a different fluid
+    # calculation formula based on weight not age, see below
     if weight < 10:
         fluid_req = fluid_day * weight
     elif weight > 10 and weight < 20:

@@ -1,6 +1,14 @@
 from fastapi import FastAPI
 from backend.calculations import nutr_infant
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+
+class Inputs(BaseModel):
+    weight: float
+    years: int
+    months: int
+
 
 app = FastAPI()
 
@@ -14,11 +22,12 @@ app.add_middleware(
 
 
 # set variables to input and output from api
-@app.get("/")
-async def root(
-    weight: float,
-    years: int = 0,
-    months: int = 1,
-) -> dict[str, int]:
+@app.post("/calc")
+async def calc(item: Inputs) -> dict[str, int]:
+    # Extract data from the item parameter
+    weight = item.weight
+    years = item.years
+    months = item.months
+    # Calculate nutrition requirements
     kcal_req, fluid_req = nutr_infant(weight, years, months)
     return {"kcal req": kcal_req, "fluid req": fluid_req}

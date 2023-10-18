@@ -3,49 +3,51 @@ import React, {useState, useEffect} from 'react';
 
 //this is the form which takes the data and then outputs the calcs
 function MyForm() {
-  const [weight, setWeight] = useState(''); 
-  const [ageYears, setAgeYears] = useState('');   
-  const [ageMonths, setAgeMonths] = useState(''); 
+  const [data, setData] = useState({
+    weight: '',
+    years: '',
+    months: '',
+  });
   const [kcalReq, setKcalRequirement] = useState(0);
   const [fluidReq, setFluidRequirement] = useState(0);
-  const [data, setData] = useState(null);
 
-  //put the data from form into apiURL
   useEffect(() => {
-    const apiUrl = `http://127.0.0.1:8000/?weight=${weight}&years=${ageYears}&months=${ageMonths}`;
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/calc', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
 
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+        if (response.ok) {
+          const responseData = await response.json();
+          setKcalRequirement(responseData['kcal req']);
+          setFluidRequirement(responseData['fluid req']);
+        } else {
+          console.error('Failed to fetch data from the server.');
         }
-        return response.json();
-      })
-      .then((data) => {
-        // Extract numeric values from the API response
-        const { "kcal req": kcalReq, "fluid req": fluidReq } = data;
-        setKcalRequirement(kcalReq);
-        setFluidRequirement(fluidReq);
-        setData(data); // Set the data for conditional rendering
-      })
-      .catch((error) => {
-        console.error('API Error:', error);
-      });
-  }, [weight, ageYears, ageMonths]);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
 
-  
- 
+    // Call fetchData when the data object changes
+    fetchData();
+  }, [data]);
+
   return (
     <div>
-      
       <form>
         <label>
           Weight (kg):
           <input
             type="number"
-            value={weight}
+            value={data.weight}
             //autorefresh - no need for submit button
-            onChange={(e) => setWeight(e.target.value)}
+            onChange={(e) => setData({ ...data, weight: parseFloat(e.target.value) })}
           />
         </label>
         <br />
@@ -53,8 +55,8 @@ function MyForm() {
           Age (years):
           <input
             type="number"
-            value={ageYears}
-            onChange={(e) => setAgeYears(e.target.value)}
+            value={data.years}
+            onChange={(e) => setData({ ...data, years: parseInt(e.target.value)})}
           />
         </label>
         <br />
@@ -62,8 +64,8 @@ function MyForm() {
           Age (months):
           <input
             type="number"
-            value={ageMonths}
-            onChange={(e) => setAgeMonths(e.target.value)}
+            value={data.months}
+            onChange={(e) => setData({...data, months: parseInt(e.target.value)})}
           />
         </label>
       </form>
@@ -80,11 +82,9 @@ function MyForm() {
         </div>
       ) : null}
     </div>
-  );
-}
+  )}
 
-
- //what the webpage looks like
+   //what the webpage looks like
 function App() {
   return (
     <div className="App">
