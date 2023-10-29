@@ -1,0 +1,12 @@
+img {
+    width: 200px;
+    height: 200px;
+ }
+
+ body { 
+    font-family: 'Helvetica', monospace; 
+    text-align: center;
+}
+link {
+    font-family: 'Helvitca', monospace, cursive;
+}

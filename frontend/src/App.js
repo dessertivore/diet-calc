@@ -1,5 +1,6 @@
 import logo from './logo.png';
 import React, {useState, useEffect} from 'react';
+import './index.css';
 
 //this is the form which takes the data and then outputs the calcs
 function MyForm() {
@@ -100,7 +101,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Made by Sophie Landau <code>(@SophieTalksFood)</code> 
+          Made by Sophie Landau (@SophieTalksFood)
         </a>
         <MyForm />
 

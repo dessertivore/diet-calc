@@ -11,6 +11,7 @@ uvicorn = "^0.23.2"
 annotated = "^0.0.2"
 path = "^16.7.1"
 ruff = "^0.0.292"
+make = "^0.1.6"
 
 
 [tool.poetry.dev-dependencies]

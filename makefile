@@ -12,6 +12,7 @@ test:
 backend:
 	poetry run uvicorn backend.main:app --reload 
 
+.PHONY: frontend
 frontend: 
-	npm run start
+	cd frontend/ && npm run start
 	
